@@ -16,7 +16,7 @@ python main.py \
     --designer-model "qwen/qwen3-8b" \
     --api \
     --api-base "https://openrouter.ai/api/v1" \
-    --api-key "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" \
+    --api-key "" \
     --retriever contriever \
     --designer-freq 1 \
     --inner-epochs 20 \
