@@ -157,6 +157,15 @@ class Executor:
                 ))
                 continue
 
+            if response is None:
+                self.logger.warning("Executor API returned None response")
+                all_results.append(ExecutionResult(
+                    action_type="NOOP",
+                    success=False,
+                    reasoning="API returned None response"
+                ))
+                continue
+
             # Parse response (may contain multiple actions)
             all_results.extend(self._parse_response(response, len(retrieved_memories)))
 
@@ -232,6 +241,8 @@ class Executor:
         return results
 
     def _normalize_response(self, response: str) -> str:
+        if response is None:
+            return ""
         text = response.replace("\r\n", "\n").strip()
         if text.startswith("```"):
             parts = text.split("```")
